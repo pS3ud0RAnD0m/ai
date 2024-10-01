@@ -13,6 +13,7 @@
 
 # keep these here, so local version control doesn't track them.
 .env*
-.idea
-.next/**
-node_modules
+.idea/
+.next/
+.vercel/
+node_modules/
