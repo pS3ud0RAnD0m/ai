@@ -1,34 +1,25 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
+// app/layout.tsx
+import "@/app/globals.css";
+import { Sidebar } from "@/app/components/ui/sidebar";
+import { Navbar } from "@/app/components/ui/navbar";
+import { ReactNode } from "react";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+interface LayoutProps {
+  children: ReactNode;
+}
 
-export const metadata: Metadata = {
-  title: "AI",
-  description: "AI",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className="min-h-screen bg-gray-900 text-white flex">
+        <Sidebar />
+        <div className="flex-1 flex flex-col">
+          <Navbar />
+          <main className="flex-1 p-4">{children}</main>
+          <footer className="p-4 bg-gray-800 text-center">
+            © 2024 AI Chat App
+          </footer>
+        </div>
       </body>
     </html>
   );
