@@ -1,4 +1,3 @@
-// app/chat/layout.tsx
 import { Sidebar } from "@/app/components/ui/sidebar";
 import { Navbar } from "@/app/components/ui/navbar";
 import { ReactNode } from "react";
