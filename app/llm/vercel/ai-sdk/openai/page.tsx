@@ -1,5 +1,5 @@
-import Chat from './layout'
+import Chat from "./layout";
 
 export default function Page() {
-    return <Chat />
+  return <Chat />;
 }
