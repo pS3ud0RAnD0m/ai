@@ -1,4 +1,3 @@
-// app/chat/page.tsx
 import { Button } from "@/app/components/ui/button";
 import { Textarea } from "@/app/components/ui/textarea";
 
