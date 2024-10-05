@@ -3,23 +3,16 @@ import { Sidebar } from "@/app/components/ui/sidebar";
 import { Navbar } from "@/app/components/ui/navbar";
 import { ReactNode } from "react";
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-export default function RootLayout({ children }: LayoutProps) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-gray-900 text-white flex">
-        <Sidebar />
-        <div className="flex-1 flex flex-col">
-          <Navbar />
-          <main className="flex-1 p-4">{children}</main>
-          <footer className="p-4 bg-gray-800 text-center">
-            Do I want this footer?
-          </footer>
-        </div>
+      <html lang="en">
+      <body className="flex h-screen">
+      <Sidebar /> {/* Sidebar Component */}
+      <div className="flex flex-col flex-1">
+        <Navbar /> {/* Navbar Component */}
+        <main className="p-4 overflow-y-auto flex-1">{children}</main> {/* Main content area */}
+      </div>
       </body>
-    </html>
+      </html>
   );
 }
