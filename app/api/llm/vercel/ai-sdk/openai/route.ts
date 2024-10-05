@@ -14,5 +14,5 @@ export async function POST(req: Request) {
     topP: 1,
   });
 
-  return result.toAIStreamResponse();
+  return result.toDataStreamResponse();
 }
