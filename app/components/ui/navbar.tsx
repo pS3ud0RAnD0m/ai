@@ -4,7 +4,7 @@ import { useState } from "react";
 import * as Headless from "@headlessui/react";
 import clsx from "clsx";
 import { LayoutGroup, motion } from "framer-motion";
-import React, { forwardRef, useId } from "react";
+import React, { forwardRef } from "react";
 import { TouchTarget } from "./button";
 import { Link } from "./link";
 
@@ -12,22 +12,22 @@ export function Navbar({
                            className,
                            ...props
                        }: React.ComponentPropsWithoutRef<"nav">) {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
     return (
         <nav
             {...props}
             className={clsx(
                 className,
-                "flex items-center justify-start gap-4 py-0 px-4",
+                "flex items-center justify-start gap-4 py-0 px-4"
             )}
         >
             {/* Original Navbar items */}
-            <NavbarItem href="/" current={true}>Home</NavbarItem>
+            <NavbarLinkItem href="/" current={true}>
+                Home
+            </NavbarLinkItem>
 
             {/* LLM item with dropdown submenu */}
             <Headless.Menu as="div" className="relative">
-                <Headless.Menu.Button as={NavbarItem} href="/llm">
+                <Headless.Menu.Button className="text-sm font-medium flex items-center px-4">
                     LLM
                 </Headless.Menu.Button>
                 <Headless.Menu.Items className="absolute mt-2 bg-white shadow-lg rounded-md z-10">
@@ -61,79 +61,43 @@ export function Navbar({
             </Headless.Menu>
 
             {/* Remaining Navbar items */}
-            <NavbarItem href="/diffusion">Diffusion</NavbarItem>
-            <NavbarItem href="/tinker">Tinker</NavbarItem>
-            <NavbarItem href="/references">References</NavbarItem>
-            <NavbarItem href="/settings">Settings</NavbarItem>
+            <NavbarLinkItem href="/diffusion">Diffusion</NavbarLinkItem>
+            <NavbarLinkItem href="/tinker">Tinker</NavbarLinkItem>
+            <NavbarLinkItem href="/references">References</NavbarLinkItem>
+            <NavbarLinkItem href="/settings">Settings</NavbarLinkItem>
         </nav>
     );
 }
 
-export function NavbarDivider({
-                                  className,
-                                  ...props
-                              }: React.ComponentPropsWithoutRef<"div">) {
-    return (
-        <div
-            aria-hidden="true"
-            {...props}
-            className={clsx(className, "h-6 w-px bg-zinc-950/10 dark:bg-white/10")}
-        />
-    );
-}
+// Separate component for link items
+type NavbarLinkItemProps = React.PropsWithChildren<
+    { current?: boolean } & React.ComponentPropsWithoutRef<typeof Link>
+>;
 
-export const NavbarItem = forwardRef<
-    HTMLSpanElement,
-    React.PropsWithChildren<
-        { current?: boolean } & Omit<React.ComponentPropsWithoutRef<typeof Link>, "ref">
-    >
->(({ current = false, className, children, ...props }, ref) => {
-    const classes = clsx(
-        className,
-        "flex items-center gap-2 text-sm font-medium transition",
-        "data-[slot=icon]:*:shrink-0 data-[slot=icon]:*:fill-zinc-500 sm:data-[slot=icon]:*:size-5",
-        // Trailing icon (down chevron or similar)
-        "data-[slot=icon]:last:[&:not(:nth-child(2))]:*:ml-auto data-[slot=icon]:last:[&:not(:nth-child(2))]:*:size-5 sm:data-[slot=icon]:last:[&:not(:nth-child(2))]:*:size-4",
-        // Avatar
-        "data-[slot=avatar]:*:-m-0.5 data-[slot=avatar]:*:size-7 data-[slot=avatar]:*:[--avatar-radius:theme(borderRadius.DEFAULT)] data-[slot=avatar]:*:[--ring-opacity:10%] sm:data-[slot=avatar]:*:size-6",
-        // Hover
-        "data-[hover]:bg-zinc-950/5 data-[slot=icon]:*:data-[hover]:fill-zinc-950",
-        // Active
-        "data-[active]:bg-zinc-950/5 data-[slot=icon]:*:data-[active]:fill-zinc-950",
-        // Dark mode
-        "dark:text-white dark:data-[slot=icon]:*:fill-zinc-400",
-        "dark:data-[hover]:bg-white/5 dark:data-[slot=icon]:*:data-[hover]:fill-white",
-        "dark:data-[active]:bg-white/5 dark:data-[slot=icon]:*:data-[active]:fill-white",
-    );
+export const NavbarLinkItem = React.memo(
+    forwardRef<HTMLAnchorElement, NavbarLinkItemProps>(
+        ({ current = false, className, children, href, ...props }, ref) => {
+            const classes = clsx(
+                className,
+                "flex items-center gap-2 text-sm font-medium transition",
+                // Dark mode styles
+                "dark:text-white dark:data-[hover]:bg-white/5 dark:data-[slot=icon]:*:data-[hover]:fill-white"
+            );
 
-    return (
-        <span ref={ref} className={clsx(className, "relative")}>
-      {current && (
-          <motion.span
-              layoutId="current-indicator"
-              className="absolute inset-x-2 -bottom-2.5 h-0.5 rounded-full bg-zinc-950 dark:bg-white"
-          />
-      )}
-            {"href" in props ? (
+            return (
                 <Link
                     {...props}
+                    href={href}
                     className={classes}
                     data-current={current ? "true" : undefined}
+                    ref={ref}
                 >
                     <TouchTarget>{children}</TouchTarget>
                 </Link>
-            ) : (
-                <Headless.Button
-                    {...props}
-                    className={clsx("cursor-default", classes)}
-                    data-current={current ? "true" : undefined}
-                >
-                    <TouchTarget>{children}</TouchTarget>
-                </Headless.Button>
-            )}
-    </span>
-    );
-});
+            );
+        }
+    )
+);
 
 export function NavbarLabel({
                                 className,
