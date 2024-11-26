@@ -5,14 +5,14 @@ import { ReactNode } from "react";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-      <html lang="en">
+    <html lang="en">
       <body className="flex h-screen overflow-hidden m-0 p-0">
-      <Sidebar /> {/* Sidebar Component */}
-      <div className="flex flex-col flex-1 h-full">
-        <Navbar /> {/* Navbar Component */}
-        <main className="p-4 overflow-y-auto flex-1">{children}</main>
-      </div>
+        <Sidebar /> {/* Sidebar Component */}
+        <div className="flex flex-col flex-1 h-full">
+          <Navbar /> {/* Navbar Component */}
+          <main className="p-4 overflow-y-auto flex-1">{children}</main>
+        </div>
       </body>
-      </html>
+    </html>
   );
 }
