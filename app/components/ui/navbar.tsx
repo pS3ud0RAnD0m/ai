@@ -17,7 +17,7 @@ export function Navbar({
             {...props}
             className={clsx(
                 className,
-                "flex items-center justify-start gap-4 py-0 px-4"
+                "flex items-center justify-center gap-16 py-4 px-4"
             )}
         >
             {/* Original Navbar items */}
