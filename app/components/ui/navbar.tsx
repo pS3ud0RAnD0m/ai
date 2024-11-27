@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import * as Headless from "@headlessui/react";
 import clsx from "clsx";
-import { LayoutGroup, motion } from "framer-motion";
 import React, { forwardRef } from "react";
 import { TouchTarget } from "./button";
 import { Link } from "./link";
@@ -94,6 +92,25 @@ export const NavbarLinkItem = React.memo(
                 >
                     <TouchTarget>{children}</TouchTarget>
                 </Link>
+            );
+        }
+    )
+);
+
+export const NavbarButtonItem = React.memo(
+    forwardRef<HTMLButtonElement, React.ComponentPropsWithoutRef<"button">>(
+        ({ className, children, ...props }, ref) => {
+            const classes = clsx(
+                className,
+                "flex items-center gap-2 text-sm font-medium transition",
+                // Dark mode styles
+                "dark:text-white dark:hover:bg-white/5"
+            );
+
+            return (
+                <button {...props} className={classes} ref={ref}>
+                    {children}
+                </button>
             );
         }
     )
