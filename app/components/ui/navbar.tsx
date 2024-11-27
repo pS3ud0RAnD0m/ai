@@ -71,10 +71,10 @@ export const NavbarLinkItem = React.memo(
     forwardRef<HTMLAnchorElement, NavbarLinkItemProps>(
         ({ current = false, className, children, href, ...props }, ref) => {
             const classes = clsx(
-                "flex items-center gap-2 text-sm font-medium transition",
+                "flex items-center gap-2 text-sm font-bold transition", // Always bold
                 current
                     ? "text-green-600" // Green text for the current page
-                    : "text-red-600 hover:font-bold hover:bg-gray-800/50", // Default red, bold and lighter background on hover
+                    : "text-red-600 hover:underline hover:underline-offset-4 hover:decoration-green-600", // Default red with green underline on hover
                 className
             );
 
@@ -97,8 +97,8 @@ export const NavbarButtonItem = React.memo(
     forwardRef<HTMLButtonElement, React.ComponentPropsWithoutRef<"button">>(
         ({ className, children, ...props }, ref) => {
             const classes = clsx(
-                "flex items-center gap-2 text-sm font-medium transition",
-                "text-red-600 hover:font-bold hover:bg-gray-800/50",
+                "flex items-center gap-2 text-sm font-bold transition", // Always bold
+                "text-red-600 hover:underline hover:underline-offset-4 hover:decoration-green-600",
                 className
             );
 
