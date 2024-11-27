@@ -1,6 +1,7 @@
+import type React from "react";
 import Image from 'next/image';
 
-const PromptContainer = () => {
+const PromptContainer: React.FC = () => {
     return (
         <div className="flex h-[97vh] w-full flex-col">
             {/* Prompt Messages */}
@@ -28,7 +29,7 @@ const PromptContainer = () => {
                 <label htmlFor="chat" className="sr-only">Enter your prompt</label>
                 <textarea
                     id="chat-input"
-                    rows="1"
+                    rows={1}
                     className="mx-2 flex min-h-full w-full rounded-md border border-slate-300 bg-slate-50 p-2 text-base text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50 dark:placeholder-slate-400 dark:focus:border-blue-600 dark:focus:ring-blue-600"
                     placeholder="Enter your prompt"
                 ></textarea>
