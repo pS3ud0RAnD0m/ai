@@ -7,9 +7,9 @@ export function SidebarLayout({
                                   children,
                               }: React.PropsWithChildren<object>) {
     const [isPrimarySidebarOpen, setIsPrimarySidebarOpen] = useState(true);
-    const [isSecondarySidebarOpen, setIsSecondarySidebarOpen] = useState(true);
+    const [isSecondarySidebarOpen, setIsSecondarySidebarOpen] = useState(false); // Default collapsed
     const [showPrimaryContent, setShowPrimaryContent] = useState(true);
-    const [showSecondaryContent, setShowSecondaryContent] = useState(true);
+    const [showSecondaryContent, setShowSecondaryContent] = useState(false); // Default hidden
 
     const togglePrimarySidebar = () => {
         if (isPrimarySidebarOpen) {
