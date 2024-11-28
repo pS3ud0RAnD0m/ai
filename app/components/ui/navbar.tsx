@@ -1,17 +1,22 @@
 "use client";
 
 import clsx from "clsx";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import { TouchTarget } from "./button";
 import { Link } from "./link";
 import Image from "next/image";
-import { usePathname } from "next/navigation"; // Import for current path detection
+import { usePathname } from "next/navigation";
 
 export function Navbar({
                            className,
                            ...props
                        }: React.ComponentPropsWithoutRef<"nav">) {
     const pathname = usePathname(); // Get the current path
+    const [activePath, setActivePath] = useState(pathname); // Track active link
+
+    const handleLinkClick = (href: string) => {
+        setActivePath(href); // Update active link immediately on click
+    };
 
     return (
         <nav
@@ -35,26 +40,50 @@ export function Navbar({
 
             {/* Centered Navbar Links */}
             <div className="flex items-center gap-16">
-                <NavbarLinkItem href="/" current={pathname === "/"}>
+                <NavbarLinkItem
+                    href="/"
+                    current={activePath === "/"}
+                    onClick={() => handleLinkClick("/")}
+                >
                     Home
                 </NavbarLinkItem>
-                <NavbarLinkItem href="/llm" current={pathname === "/llm"}>
+                <NavbarLinkItem
+                    href="/llm"
+                    current={activePath === "/llm"}
+                    onClick={() => handleLinkClick("/llm")}
+                >
                     LLM
                 </NavbarLinkItem>
-                <NavbarLinkItem href="/diffusion" current={pathname === "/diffusion"}>
+                <NavbarLinkItem
+                    href="/diffusion"
+                    current={activePath === "/diffusion"}
+                    onClick={() => handleLinkClick("/diffusion")}
+                >
                     Diffusion
                 </NavbarLinkItem>
-                <NavbarLinkItem href="/tinker" current={pathname === "/tinker"}>
+                <NavbarLinkItem
+                    href="/tinker"
+                    current={activePath === "/tinker"}
+                    onClick={() => handleLinkClick("/tinker")}
+                >
                     Tinker
                 </NavbarLinkItem>
-                <NavbarLinkItem href="/references" current={pathname === "/references"}>
+                <NavbarLinkItem
+                    href="/references"
+                    current={activePath === "/references"}
+                    onClick={() => handleLinkClick("/references")}
+                >
                     References
                 </NavbarLinkItem>
             </div>
 
             {/* Settings LinkItem on Far Right */}
             <div className="flex items-center">
-                <NavbarLinkItem href="/settings" current={pathname === "/settings"}>
+                <NavbarLinkItem
+                    href="/settings"
+                    current={activePath === "/settings"}
+                    onClick={() => handleLinkClick("/settings")}
+                >
                     Settings
                 </NavbarLinkItem>
             </div>
@@ -62,42 +91,12 @@ export function Navbar({
     );
 }
 
-// Separate component for link items
-type NavbarLinkItemProps = React.PropsWithChildren<
-    { current?: boolean } & React.ComponentPropsWithoutRef<typeof Link>
->;
-
-export const NavbarLinkItem = React.memo(
-    forwardRef<HTMLAnchorElement, NavbarLinkItemProps>(
-        ({ current = false, className, children, href, ...props }, ref) => {
-            const classes = clsx(
-                "flex items-center gap-2 text-sm font-bold transition", // Always bold
-                current
-                    ? "text-green-600" // Green text for the current page
-                    : "text-red-600 hover:underline hover:underline-offset-4 hover:decoration-green-600", // Default red with green underline on hover
-                className
-            );
-
-            return (
-                <Link
-                    {...props}
-                    href={href}
-                    className={classes}
-                    data-current={current ? "true" : undefined}
-                    ref={ref}
-                >
-                    <TouchTarget>{children}</TouchTarget>
-                </Link>
-            );
-        }
-    )
-);
-
+// Separate component for button items
 export const NavbarButtonItem = React.memo(
     forwardRef<HTMLButtonElement, React.ComponentPropsWithoutRef<"button">>(
         ({ className, children, ...props }, ref) => {
             const classes = clsx(
-                "flex items-center gap-2 text-sm font-bold transition", // Always bold
+                "flex items-center gap-2 text-sm font-bold transition",
                 "text-red-600 hover:underline hover:underline-offset-4 hover:decoration-green-600",
                 className
             );
@@ -106,6 +105,38 @@ export const NavbarButtonItem = React.memo(
                 <button {...props} className={classes} ref={ref}>
                     {children}
                 </button>
+            );
+        }
+    )
+);
+
+// Separate component for link items
+type NavbarLinkItemProps = React.PropsWithChildren<
+    { current?: boolean; onClick?: () => void } & React.ComponentPropsWithoutRef<typeof Link>
+>;
+
+export const NavbarLinkItem = React.memo(
+    forwardRef<HTMLAnchorElement, NavbarLinkItemProps>(
+        ({ current = false, className, children, href, onClick, ...props }, ref) => {
+            const classes = clsx(
+                "flex items-center gap-2 text-sm font-bold transition",
+                current
+                    ? "text-green-600" // Green text for the active page
+                    : "text-red-600 hover:underline hover:underline-offset-4 hover:decoration-green-600", // Default red with green underline on hover
+                className
+            );
+
+            return (
+                <Link
+                    {...props}
+                    href={href}
+                    onClick={onClick} // Trigger onClick when the link is clicked
+                    className={classes}
+                    data-current={current ? "true" : undefined}
+                    ref={ref}
+                >
+                    <TouchTarget>{children}</TouchTarget>
+                </Link>
             );
         }
     )
