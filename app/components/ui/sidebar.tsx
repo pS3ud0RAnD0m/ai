@@ -2,12 +2,12 @@
 
 import * as Headless from "@headlessui/react";
 import clsx from "clsx";
-import { Fragment } from "react";
 
 export function Sidebar({
                             className,
+                            toggleSidebar,
                             ...props
-                        }: React.ComponentPropsWithoutRef<"nav">) {
+                        }: React.ComponentPropsWithoutRef<"nav"> & { toggleSidebar: () => void }) {
     return (
         <nav {...props} className={clsx(className, "flex h-full min-h-0 flex-col")}>
             <SidebarHeader>
@@ -108,9 +108,20 @@ function StoreConversationCheckbox() {
 }
 
 // Header and body for the sidebar
-export function SidebarHeader({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
+function SidebarHeader({
+                           className,
+                           ...props
+                       }: React.ComponentPropsWithoutRef<"div">) {
     return (
-        <div {...props} className={clsx(className, "border-b border-gray-300 p-4 dark:border-gray-700")} />
+        <div
+            {...props}
+            className={clsx(
+                className,
+                "relative border-b border-gray-300 p-4 dark:border-gray-700"
+            )}
+        >
+            <h2 className="text-lg font-bold">Configuration</h2>
+        </div>
     );
 }
 
