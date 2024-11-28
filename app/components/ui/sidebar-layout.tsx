@@ -39,9 +39,7 @@ export function SidebarLayout({
                     isPrimarySidebarOpen ? "w-64" : "w-16"
                 } bg-gray-100 dark:bg-gray-800 relative`}
             >
-                {showPrimaryContent && isPrimarySidebarOpen && (
-                    <Sidebar toggleSidebar={togglePrimarySidebar} />
-                )}
+                {showPrimaryContent && isPrimarySidebarOpen && <Sidebar />}
                 {/* Primary Sidebar Toggle Button */}
                 <button
                     onClick={togglePrimarySidebar}
@@ -57,9 +55,7 @@ export function SidebarLayout({
                     isSecondarySidebarOpen ? "w-64" : "w-16"
                 } bg-gray-200 dark:bg-gray-700 relative`}
             >
-                {showSecondaryContent && isSecondarySidebarOpen && (
-                    <SecondarySidebar toggleSidebar={toggleSecondarySidebar} />
-                )}
+                {showSecondaryContent && isSecondarySidebarOpen && <SecondarySidebar />}
                 {/* Secondary Sidebar Toggle Button */}
                 <button
                     onClick={toggleSecondarySidebar}
@@ -75,7 +71,7 @@ export function SidebarLayout({
     );
 }
 
-function SecondarySidebar({ toggleSidebar }: { toggleSidebar: () => void }) {
+function SecondarySidebar() {
     return (
         <div className="flex flex-col h-full p-4 space-y-4">
             <h3 className="text-lg font-bold text-gray-700 dark:text-gray-300">
