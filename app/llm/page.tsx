@@ -1,5 +1,5 @@
-import PromptContainer from "@/app/components/ui/prompt/prompt-container";
+import ContainerLmStudio from "@/app/components/ui/prompt/container-lm-studio";
 
 export default function LLMPage() {
-  return <PromptContainer />;
+  return <ContainerLmStudio />;
 }
