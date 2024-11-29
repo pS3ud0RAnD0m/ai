@@ -15,5 +15,4 @@
 .env*
 .idea/
 .next/
-.vercel/
 node_modules/
