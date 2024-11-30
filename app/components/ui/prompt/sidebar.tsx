@@ -18,7 +18,7 @@ export function Sidebar({ className, ...props }: React.ComponentPropsWithoutRef<
 
 // Dropdown for selecting the provider
 function ProviderDropdown() {
-    const providers = ["OpenAI", "Anthropic", "X", "Local"];
+    const providers = ["Local: LM Studio", "OpenAI", "Anthropic", "X"];
     return (
         <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
