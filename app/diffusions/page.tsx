@@ -1,8 +1,8 @@
-export default function SettingsPage() {
+export default function DiffusionsPage() {
     return (
         <div className="p-4">
             <h1 className="text-lg mb-4">
-                <span className="text-red-600">Hello, this is the diffusion page!</span>
+                <span className="text-red-600">Hello, this is the diffusions page!</span>
                 <br />
                 <span className="text-gray-600">More features will be added here soon.</span>
             </h1>

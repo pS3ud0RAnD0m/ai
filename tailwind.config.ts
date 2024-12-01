@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
+import typography from "@tailwindcss/typography";
 
 const config: Config = {
   content: [
@@ -13,6 +14,7 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         metallic: "#c0c0c0", // Polished metallic color
+        customGray: "#202020",
       },
       boxShadow: {
         polished: "0px 0px 3px 1px rgba(192, 192, 192, 0.8)", // Polished shadow
@@ -22,7 +24,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [typography],
 };
 
 export default config;
