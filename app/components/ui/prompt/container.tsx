@@ -129,7 +129,7 @@ const Container: React.FC = () => {
                     value={input}
                     onChange={(e) => {
                         handleInputChange(e);
-                        autoExpand(); // Adjust height dynamically as the user types
+                        autoExpand();
                     }}
                     className="w-full bg-black text-white placeholder-gray-500 border-2 border-metallic shadow-polished rounded-md px-4 py-2 focus:ring-2 focus:border-green-500 outline-none resize-none"
                     rows={1} // Start with a single row

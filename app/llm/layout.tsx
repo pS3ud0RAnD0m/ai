@@ -9,8 +9,8 @@ interface LayoutProps {
 
 export default function LLMLayout({ children }: LayoutProps) {
     return (
-        <>
+        <SidebarLayout>
             {children}
-        </>
+        </SidebarLayout>
     );
 }
