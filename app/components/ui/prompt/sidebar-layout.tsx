@@ -37,7 +37,7 @@ export function SidebarLayout({
             <div
                 className={`${
                     isPrimarySidebarOpen ? "w-64" : "w-16"
-                } bg-gray-100 dark:bg-gray-800 relative`}
+                } bg-black border border-gray-600 relative`}
             >
                 {showPrimaryContent && isPrimarySidebarOpen && <Sidebar />}
                 {/* Primary Sidebar Toggle Button */}
@@ -53,7 +53,7 @@ export function SidebarLayout({
             <div
                 className={`${
                     isSecondarySidebarOpen ? "w-64" : "w-16"
-                } bg-gray-200 dark:bg-gray-700 relative`}
+                } bg-black border border-gray-600 relative`}
             >
                 {showSecondaryContent && isSecondarySidebarOpen && <SecondarySidebar />}
                 {/* Secondary Sidebar Toggle Button */}
@@ -66,7 +66,7 @@ export function SidebarLayout({
             </div>
 
             {/* Main Content */}
-            <main className="flex-1 p-4 bg-white dark:bg-gray-900">{children}</main>
+            <main className="flex-1 p-4 bg-white dark:bg-black">{children}</main>
         </div>
     );
 }
@@ -74,22 +74,22 @@ export function SidebarLayout({
 function SecondarySidebar() {
     return (
         <div className="flex flex-col h-full p-4 space-y-4">
-            <h3 className="text-lg font-bold text-gray-700 dark:text-gray-300">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-300">
                 Conversations
             </h3>
             <ul className="space-y-2">
                 <li className="text-sm text-gray-600 dark:text-gray-400">
-                    <a href="#" className="hover:text-blue-500">
+                    <a href="#" className="hover:text-green-600">
                         Placeholder conversation 1
                     </a>
                 </li>
                 <li className="text-sm text-gray-600 dark:text-gray-400">
-                    <a href="#" className="hover:text-blue-500">
+                    <a href="#" className="hover:text-green-600">
                         Placeholder conversation 2
                     </a>
                 </li>
                 <li className="text-sm text-gray-600 dark:text-gray-400">
-                    <a href="#" className="hover:text-blue-500">
+                    <a href="#" className="hover:text-green-600">
                         Placeholder conversation 3
                     </a>
                 </li>

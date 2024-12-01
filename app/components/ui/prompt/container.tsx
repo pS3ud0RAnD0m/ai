@@ -122,7 +122,7 @@ const Container: React.FC = () => {
             </div>
             <form
                 onSubmit={handleCustomSubmit}
-                className="flex flex-col items-start space-y-2 p-3 bg-black"
+                className="flex items-center space-x-2 p-3 bg-black"
             >
                 <textarea
                     ref={inputRef}
@@ -131,7 +131,7 @@ const Container: React.FC = () => {
                         handleInputChange(e);
                         autoExpand();
                     }}
-                    className="w-full bg-black text-white placeholder-gray-500 border-2 border-metallic shadow-polished rounded-md px-4 py-2 focus:ring-2 focus:border-green-500 outline-none resize-none"
+                    className="flex-1 bg-black text-white placeholder-gray-500 border-2 border-metallic shadow-polished rounded-md px-4 py-2 focus:ring-1 focus:border-green-500 outline-none resize-none"
                     rows={1} // Start with a single row
                     disabled={isLoading}
                     onKeyDown={(e) => {
@@ -140,13 +140,15 @@ const Container: React.FC = () => {
                             handleCustomSubmit(e); // Submit the message
                         }
                     }}
+                    tabIndex={0} // Ensure textarea is focusable
                 />
                 <button
                     type="submit"
                     disabled={!input.trim() || isLoading}
-                    className={`self-end px-4 py-2 bg-red-600 text-white rounded-md ${
-                        !isLoading ? "hover:ring-2 hover:ring-green-500" : ""
+                    className={`px-4 py-2 bg-red-600 text-white rounded-md ${
+                        !isLoading ? "hover:ring-1 focus:ring-1 hover:ring-green-500 focus:ring-green-500" : ""
                     } disabled:bg-gray-600 ${clicked ? "bg-green-500" : ""}`}
+                    tabIndex={0}
                 >
                     {isLoading ? "Processing ..." : "Send"}
                 </button>
