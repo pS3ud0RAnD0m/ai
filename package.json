@@ -24,13 +24,15 @@
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
     "remark-gfm": "^4.0.0",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@types/node": "^20.6.0",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.7",
     "@types/tailwindcss": "^3.0.11",
+    "@types/uuid": "^10.0.0",
     "eslint": "^8.51.0",
     "eslint-config-next": "14.2.13",
     "postcss": "^8.4.27",

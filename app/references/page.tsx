@@ -49,10 +49,12 @@ const ReferencesPage: React.FC = () => {
     return (
         <div className="p-6 bg-black text-gray-200">
             <h1 className="text-2xl font-bold mb-4 text-red-600">References</h1>
-            <div className="prose prose-invert prose-sm max-w-none">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {markdownContent}
-                </ReactMarkdown>
+            <div className="p-4 bg-gray-900 rounded-lg">
+                <div className="prose prose-invert prose-sm max-w-none">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {markdownContent}
+                    </ReactMarkdown>
+                </div>
             </div>
         </div>
     );
