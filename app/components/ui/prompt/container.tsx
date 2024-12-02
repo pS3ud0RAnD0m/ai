@@ -5,6 +5,7 @@ import { useChat, Message } from "ai/react";
 import axios from "axios";
 import Image from "next/image";
 import DOMPurify from "dompurify";
+import { v4 as uuidv4 } from "uuid";
 
 const Container: React.FC = () => {
     const { messages, input, handleInputChange, setMessages, setInput } = useChat();
@@ -35,7 +36,7 @@ const Container: React.FC = () => {
         setTimeout(() => setClicked(false), 200);
 
         const newUserMessage: Message = {
-            id: crypto.randomUUID(),
+            id: uuidv4(), // Replace crypto.randomUUID() with uuidv4()
             role: "user",
             content: userMessage,
         };
@@ -63,7 +64,7 @@ const Container: React.FC = () => {
             const assistantContent = response.data?.choices?.[0]?.message?.content;
             if (assistantContent) {
                 const newAssistantMessage: Message = {
-                    id: crypto.randomUUID(),
+                    id: uuidv4(), // Replace crypto.randomUUID() with uuidv4()
                     role: "assistant",
                     content: assistantContent.replace(/<\/s>$/, ""),
                 };
@@ -71,7 +72,7 @@ const Container: React.FC = () => {
             }
         } catch (error) {
             const errorMessage: Message = {
-                id: crypto.randomUUID(),
+                id: uuidv4(), // Replace crypto.randomUUID() with uuidv4()
                 role: "system",
                 content: `Error: Unable to process your request. ${
                     error instanceof Error ? error.message : ""

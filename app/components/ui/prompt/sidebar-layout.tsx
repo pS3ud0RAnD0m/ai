@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Sidebar } from "./sidebar";
+import Image from "next/image";
 
 export function SidebarLayout({
                                   children,
@@ -37,15 +38,25 @@ export function SidebarLayout({
             <div
                 className={`${
                     isPrimarySidebarOpen ? "w-64" : "w-16"
-                } bg-black border border-gray-600 relative`}
+                } bg-gray-900 border border-gray-600 relative`}
             >
                 {showPrimaryContent && isPrimarySidebarOpen && <Sidebar />}
                 {/* Primary Sidebar Toggle Button */}
                 <button
                     onClick={togglePrimarySidebar}
-                    className="absolute top-1 right-1 z-50 flex h-6 w-6 items-center justify-center rounded-full bg-gray-500 text-white shadow-md hover:bg-gray-600"
+                    className="absolute top-1 right-1 z-50 flex h-6 w-6 items-center justify-center rounded-full shadow-md"
                 >
-                    {isPrimarySidebarOpen ? "<" : ">"}
+                    <Image
+                        src={
+                            isPrimarySidebarOpen
+                                ? "/assets/images/icons/button-sidebar-toggle-left.png"
+                                : "/assets/images/icons/button-sidebar-toggle-right.png"
+                        }
+                        alt="Sidebar Toggle"
+                        width={24}
+                        height={24}
+                        priority
+                    />
                 </button>
             </div>
 
@@ -53,15 +64,25 @@ export function SidebarLayout({
             <div
                 className={`${
                     isSecondarySidebarOpen ? "w-64" : "w-16"
-                } bg-black border border-gray-600 relative`}
+                } bg-gray-950 border border-gray-600 relative`}
             >
                 {showSecondaryContent && isSecondarySidebarOpen && <SecondarySidebar />}
                 {/* Secondary Sidebar Toggle Button */}
                 <button
                     onClick={toggleSecondarySidebar}
-                    className="absolute top-1 right-1 z-50 flex h-6 w-6 items-center justify-center rounded-full bg-gray-500 text-white shadow-md hover:bg-gray-600"
+                    className="absolute top-1 right-1 z-50 flex h-6 w-6 items-center justify-center rounded-full shadow-md"
                 >
-                    {isSecondarySidebarOpen ? "<" : ">"}
+                    <Image
+                        src={
+                            isSecondarySidebarOpen
+                                ? "/assets/images/icons/button-sidebar-toggle-left.png"
+                                : "/assets/images/icons/button-sidebar-toggle-right.png"
+                        }
+                        alt="Sidebar Toggle"
+                        width={24}
+                        height={24}
+                        priority
+                    />
                 </button>
             </div>
 
