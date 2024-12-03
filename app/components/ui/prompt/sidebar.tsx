@@ -111,7 +111,7 @@ function SidebarHeader({ className, ...props }: React.ComponentPropsWithoutRef<"
                 "relative border-b border-gray-300 p-4 dark:border-gray-700"
             )}
         >
-            <h2 className="text-lg font-bold">Configuration</h2>
+            <h2 className="text-lg font-bold">LLM Config</h2>
         </div>
     );
 }

@@ -23,7 +23,7 @@ export function Navbar({
             {...props}
             className={clsx(
                 className,
-                "flex items-center justify-between gap-4 py-4 px-4"
+                "flex items-center justify-between gap-4 py-4 px-4 bg-gray-900 border-b border-gray-600"
             )}
         >
             {/* App Icon and Name */}
@@ -55,11 +55,11 @@ export function Navbar({
                     LLM
                 </NavbarLinkItem>
                 <NavbarLinkItem
-                    href="/diffusion"
-                    current={activePath === "/diffusion"}
-                    onClick={() => handleLinkClick("/diffusion")}
+                    href="/diffusions"
+                    current={activePath === "/diffusions"}
+                    onClick={() => handleLinkClick("/diffusions")}
                 >
-                    Diffusion
+                    Diffusions
                 </NavbarLinkItem>
                 <NavbarLinkItem
                     href="/tinker"
@@ -121,8 +121,8 @@ export const NavbarLinkItem = React.memo(
             const classes = clsx(
                 "flex items-center gap-2 text-sm font-bold transition",
                 current
-                    ? "text-green-600" // Green text for the active page
-                    : "text-red-600 hover:underline hover:underline-offset-4 hover:decoration-green-600", // Default red with green underline on hover
+                    ? "text-green-600"
+                    : "text-red-600 hover:underline hover:underline-offset-4 hover:decoration-green-600",
                 className
             );
 
