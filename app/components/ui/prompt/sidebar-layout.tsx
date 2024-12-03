@@ -38,7 +38,7 @@ export function SidebarLayout({
             <div
                 className={`${
                     isPrimarySidebarOpen ? "w-64" : "w-16"
-                } bg-gray-900 border border-gray-600 relative`}
+                } bg-gray-900 border-r border-gray-600 relative`}
             >
                 {showPrimaryContent && isPrimarySidebarOpen && <Sidebar />}
                 {/* Primary Sidebar Toggle Button */}
@@ -64,7 +64,7 @@ export function SidebarLayout({
             <div
                 className={`${
                     isSecondarySidebarOpen ? "w-64" : "w-16"
-                } bg-gray-950 border border-gray-600 relative`}
+                } bg-gray-950 border-r border-gray-600 relative`}
             >
                 {showSecondaryContent && isSecondarySidebarOpen && <SecondarySidebar />}
                 {/* Secondary Sidebar Toggle Button */}
