@@ -7,7 +7,7 @@ interface LayoutProps {
     children: ReactNode;
 }
 
-export default function LLMLayout({ children }: LayoutProps) {
+export default function LLMsLayout({ children }: LayoutProps) {
     return (
         <SidebarLayout>
             {children}

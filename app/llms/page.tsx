@@ -1,5 +1,5 @@
 import ContainerLmStudio from "@/app/components/ui/prompt/container";
 
-export default function LLMPage() {
+export default function LLMsPage() {
   return <ContainerLmStudio />;
 }
