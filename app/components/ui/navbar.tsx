@@ -48,11 +48,11 @@ export function Navbar({
                     Home
                 </NavbarLinkItem>
                 <NavbarLinkItem
-                    href="/llms"
-                    current={activePath === "/llms"}
-                    onClick={() => handleLinkClick("/llms")}
+                    href="/transformers"
+                    current={activePath === "/transformers"}
+                    onClick={() => handleLinkClick("/transformers")}
                 >
-                    LLMs
+                    Transformers
                 </NavbarLinkItem>
                 <NavbarLinkItem
                     href="/diffusions"

@@ -7,7 +7,7 @@ interface LayoutProps {
     children: ReactNode;
 }
 
-export default function LLMsLayout({ children }: LayoutProps) {
+export default function TransformersLayout({ children }: LayoutProps) {
     return (
         <SidebarLayout>
             {children}
