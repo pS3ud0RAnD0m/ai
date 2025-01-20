@@ -87,7 +87,7 @@ export function SidebarLayout({
             </div>
 
             {/* Main Content */}
-            <main className="flex-1 p-4 bg-white dark:bg-black">{children}</main>
+            <main className="flex-1 p-4 bg-black">{children}</main>
         </div>
     );
 }
@@ -95,21 +95,21 @@ export function SidebarLayout({
 function SecondarySidebar() {
     return (
         <div className="flex flex-col h-full p-4 space-y-4">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-300">
+            <h3 className="text-lg font-bold text-gray-900">
                 Conversations
             </h3>
             <ul className="space-y-2">
-                <li className="text-sm text-gray-600 dark:text-gray-400">
+                <li className="text-sm text-gray-600">
                     <a href="#" className="hover:text-green-600">
                         Placeholder conversation 1
                     </a>
                 </li>
-                <li className="text-sm text-gray-600 dark:text-gray-400">
+                <li className="text-sm text-gray-600">
                     <a href="#" className="hover:text-green-600">
                         Placeholder conversation 2
                     </a>
                 </li>
-                <li className="text-sm text-gray-600 dark:text-gray-400">
+                <li className="text-sm text-gray-600">
                     <a href="#" className="hover:text-green-600">
                         Placeholder conversation 3
                     </a>
