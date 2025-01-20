@@ -35,7 +35,7 @@ export function Navbar({
                     height={24}
                     className="h-6 w-6"
                 />
-                <NavbarLabel className="text-red-600 text-lg font-bold">AI</NavbarLabel>
+                <NavbarLabel className="text-gray-400 text-lg font-bold">AI</NavbarLabel>
             </div>
 
             {/* Centered Navbar Links */}
@@ -122,7 +122,7 @@ export const NavbarLinkItem = React.memo(
                 "flex items-center gap-2 text-sm font-bold transition",
                 current
                     ? "text-green-600"
-                    : "text-red-600 hover:underline hover:underline-offset-4 hover:decoration-green-600",
+                    : "text-gray-400 hover:underline hover:underline-offset-4 hover:decoration-green-600",
                 className
             );
 
