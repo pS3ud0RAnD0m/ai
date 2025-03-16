@@ -2,6 +2,13 @@
 
 import * as Headless from "@headlessui/react";
 import clsx from "clsx";
+import { useState, useEffect, useCallback } from "react";
+import axios from "axios";
+
+const PROVIDERS: Record<string, string | undefined> = {
+    "Local: LM Studio": process.env.NEXT_PUBLIC_LM_STUDIO_API_BASE_URL,
+    "OpenAI": process.env.NEXT_PUBLIC_OPENAI_API_BASE_URL,
+};
 
 export function Sidebar({ className, ...props }: React.ComponentPropsWithoutRef<"nav">) {
     return (
@@ -12,28 +19,48 @@ export function Sidebar({ className, ...props }: React.ComponentPropsWithoutRef<
     );
 }
 
-// Dropdown for selecting the provider
+// Provider selection dropdown
 function ProviderDropdown() {
-    const providers = ["Local: LM Studio", "OpenAI", "Anthropic", "X"];
+    const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
+    const [models, setModels] = useState<string[]>([]);
+    const OPENAI_API_KEY = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
+
+    const fetchModels = useCallback(async (apiBaseUrl: string) => {
+        try {
+            const headers: Record<string, string> = {};
+            if (selectedProvider === "OpenAI" && OPENAI_API_KEY) {
+                headers["Authorization"] = `Bearer ${OPENAI_API_KEY}`;
+            }
+
+            const response = await axios.get(`${apiBaseUrl}/v1/models`, { headers });
+            const modelNames = response.data?.data?.map((model: { id: string }) => model.id) || [];
+            setModels(modelNames);
+        } catch (error) {
+            console.error("Error fetching models:", error);
+            setModels([]);
+        }
+    }, [selectedProvider, OPENAI_API_KEY]);
+
+    useEffect(() => {
+        if (selectedProvider && PROVIDERS[selectedProvider]) {
+            fetchModels(PROVIDERS[selectedProvider] as string);
+        }
+    }, [selectedProvider, fetchModels]);
+
     return (
         <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-400">
-                Provider
-            </label>
-            <Headless.Listbox>
+            <label className="block text-sm font-medium text-gray-400">Provider</label>
+            <Headless.Listbox value={selectedProvider} onChange={setSelectedProvider}>
                 <Headless.Listbox.Button className="w-full rounded-md border border-gray-500 text-gray-400 bg-black py-2 px-3 text-left shadow-sm focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 sm:text-sm">
-                    Select provider
+                    {selectedProvider || "Select provider"}
                 </Headless.Listbox.Button>
                 <Headless.Listbox.Options className="absolute z-10 mt-1 w-full rounded-md text-gray-400 bg-black shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                    {providers.map((provider) => (
+                    {Object.keys(PROVIDERS).map((provider) => (
                         <Headless.Listbox.Option
                             key={provider}
                             value={provider}
                             className={({ active }) =>
-                                clsx(
-                                    "cursor-pointer select-none px-4 py-2",
-                                    active ? "bg-green-900 text-gray-400" : "text-gray-400"
-                                )
+                                clsx("cursor-pointer select-none px-4 py-2", active ? "bg-green-900 text-gray-400" : "text-gray-400")
                             }
                         >
                             {provider}
@@ -41,84 +68,36 @@ function ProviderDropdown() {
                     ))}
                 </Headless.Listbox.Options>
             </Headless.Listbox>
-        </div>
-    );
-}
 
-// Dropdown for selecting the model
-function ModelDropdown() {
-    const models = ["ChatGPT 4", "ChatGPT 4o", "Grok"];
-    return (
-        <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-400">
-                Model
-            </label>
-            <Headless.Listbox>
-                <Headless.Listbox.Button className="w-full rounded-md border text-gray-400 border-gray-500 bg-black py-2 px-3 text-left shadow-sm focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 sm:text-sm">
-                    Select model
-                </Headless.Listbox.Button>
-                <Headless.Listbox.Options className="absolute z-10 mt-1 w-full rounded-md text-gray-400 bg-black shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                    {models.map((model) => (
-                        <Headless.Listbox.Option
-                            key={model}
-                            value={model}
-                            className={({ active }) =>
-                                clsx(
-                                    "cursor-pointer select-none px-4 py-2",
-                                    active ? "bg-green-900 text-gray-400" : "text-gray-400"
-                                )
-                            }
-                        >
-                            {model}
-                        </Headless.Listbox.Option>
-                    ))}
-                </Headless.Listbox.Options>
-            </Headless.Listbox>
-        </div>
-    );
-}
-
-// Checkbox for storing conversations
-function StoreConversationCheckbox() {
-    return (
-        <div className="flex items-center">
-            <input
-                id="store-conversation"
-                type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-green-900 focus:ring-green-900 dark:bg-gray-900 dark:border-gray-700"
-            />
-            <label
-                htmlFor="store-conversation"
-                className="ml-2 block text-sm font-medium text-gray-400"
-            >
-                Store conversation
-            </label>
-        </div>
-    );
-}
-
-// Header for the sidebar
-function SidebarHeader({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
-    return (
-        <div
-            {...props}
-            className={clsx(
-                className,
-                "relative border-b border-gray-300 p-4 dark:border-gray-700"
+            {/* Display fetched models */}
+            {models.length > 0 && (
+                <div className="mt-2 p-2 bg-gray-800 rounded-md">
+                    <label className="block text-sm font-medium text-gray-400">Available Models</label>
+                    <ul className="text-gray-300 text-sm mt-1">
+                        {models.map((model) => (
+                            <li key={model} className="py-1">{model}</li>
+                        ))}
+                    </ul>
+                </div>
             )}
-        >
+        </div>
+    );
+}
+
+// Sidebar header
+function SidebarHeader() {
+    return (
+        <div className="relative border-b border-gray-300 p-4 dark:border-gray-700">
             <h2 className="text-lg font-bold text-gray-400">Configuration</h2>
         </div>
     );
 }
 
-// Sidebar body encapsulating all body content
-export function SidebarBody({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
+// Sidebar body
+function SidebarBody() {
     return (
-        <div {...props} className={clsx(className, "flex flex-1 flex-col p-4 space-y-4")}>
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 h-full">
             <ProviderDropdown />
-            <ModelDropdown />
-            <StoreConversationCheckbox />
         </div>
     );
 }
