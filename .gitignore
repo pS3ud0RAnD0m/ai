@@ -6,6 +6,7 @@
 !next.config.mjs
 !package.json
 !package-lock.json
+!patches/**
 !postcss.config.mjs
 !README.md
 !tailwind.config.ts
