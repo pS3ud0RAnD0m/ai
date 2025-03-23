@@ -4,32 +4,29 @@ import axios from "axios";
 import * as dotenv from "dotenv";
 import { setTimeout } from "timers/promises";
 
-dotenv.config();
+dotenv.config({ path: ".env.local" });
 
-const BASE_URL = process.env.NEXT_PUBLIC_HOSTNAME || "http://localhost";
+const BASE_URL = process.env.NEXT_PUBLIC_HOSTNAME;
 const FULL_URL = `${BASE_URL}:3000/`;
 const TIMEOUT_MS = 30000;
 
-console.log(`BASE_URL: ${BASE_URL}`);
-console.log(`FULL_URL: ${FULL_URL}`);
-
 function startDevServer() {
   return spawn(
-    "node",
-    ["--inspect", "./node_modules/next/dist/bin/next", "dev"],
-    {
-      stdio: "inherit",
-      env: { ...process.env },
-    },
+      "node",
+      ["--inspect", "./node_modules/next/dist/bin/next", "dev"],
+      {
+        stdio: "inherit",
+        env: { ...process.env },
+      }
   );
 }
 
 function getErrorCode(err: unknown): string {
   if (
-    typeof err === "object" &&
-    err !== null &&
-    "code" in err &&
-    typeof (err as { code: unknown }).code === "string"
+      typeof err === "object" &&
+      err !== null &&
+      "code" in err &&
+      typeof (err as { code: unknown }).code === "string"
   ) {
     return (err as { code: string }).code;
   }
@@ -38,10 +35,10 @@ function getErrorCode(err: unknown): string {
 
 function getErrorMessage(err: unknown): string {
   if (
-    typeof err === "object" &&
-    err !== null &&
-    "message" in err &&
-    typeof (err as { message: unknown }).message === "string"
+      typeof err === "object" &&
+      err !== null &&
+      "message" in err &&
+      typeof (err as { message: unknown }).message === "string"
   ) {
     return (err as { message: string }).message;
   }
@@ -80,18 +77,16 @@ async function crawlSite(startPath: string) {
     visited.add(path);
 
     const url = `${BASE_URL}:3000${path}`;
-    console.log(`Visiting: ${url}`);
+    console.log(url);
 
     try {
-      const response = await page.goto(url, { waitUntil: "networkidle" });
-      const status = response?.status() ?? "NO_RESPONSE";
-      console.log(`Status: ${status}`);
+      await page.goto(url, { waitUntil: "networkidle" });
 
       const hrefs = await page.$$eval("a[href]", (elements) =>
-        elements
-          .map((el) => (el as HTMLAnchorElement).href)
-          .filter((href) => href.startsWith(window.location.origin))
-          .map((href) => new URL(href).pathname),
+          elements
+              .map((el) => (el as HTMLAnchorElement).href)
+              .filter((href) => href.startsWith(window.location.origin))
+              .map((href) => new URL(href).pathname)
       );
 
       for (const href of hrefs) {
