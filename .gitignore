@@ -10,6 +10,7 @@
 !postcss.config.mjs
 !README.md
 !tailwind.config.ts
+!tests/**
 !tsconfig.json
 
 # keep these here, so local version control doesn't track them.
