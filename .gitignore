@@ -12,6 +12,7 @@
 !tailwind.config.ts
 !tests/**
 !tsconfig.json
+!tsconfig.tests.json
 
 # keep these here, so local version control doesn't track them.
 .env*
