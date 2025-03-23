@@ -12,22 +12,32 @@ const TIMEOUT_MS = 30000;
 const RETRIES = 3;
 
 function startProdServer() {
-  return spawn("node", ["--inspect", "./node_modules/next/dist/bin/next", "start"], {
-    stdio: "inherit",
-    env: { ...process.env },
-  });
+  return spawn(
+    "node",
+    ["--inspect", "./node_modules/next/dist/bin/next", "start"],
+    {
+      stdio: "inherit",
+      env: { ...process.env },
+    },
+  );
 }
 
 function getErrorCode(err: unknown): string {
-  return typeof err === "object" && err !== null && "code" in err && typeof (err as { code: unknown }).code === "string"
-      ? (err as { code: string }).code
-      : "UNKNOWN";
+  return typeof err === "object" &&
+    err !== null &&
+    "code" in err &&
+    typeof (err as { code: unknown }).code === "string"
+    ? (err as { code: string }).code
+    : "UNKNOWN";
 }
 
 function getErrorMessage(err: unknown): string {
-  return typeof err === "object" && err !== null && "message" in err && typeof (err as { message: unknown }).message === "string"
-      ? (err as { message: string }).message
-      : "Unknown error";
+  return typeof err === "object" &&
+    err !== null &&
+    "message" in err &&
+    typeof (err as { message: unknown }).message === "string"
+    ? (err as { message: string }).message
+    : "Unknown error";
 }
 
 async function waitForServerReady(): Promise<void> {
@@ -84,22 +94,26 @@ async function crawlSite(startPath: string): Promise<void> {
     }
 
     const avg = results.reduce((acc, r) => acc + r.time, 0) / RETRIES;
-    const resultText = results.map(r => `[${r.status}, ${r.time}ms]`).join(" ");
+    const resultText = results
+      .map((r) => `[${r.status}, ${r.time}ms]`)
+      .join(" ");
     console.log(`${url} → ${resultText} avg: ${Math.round(avg)}ms`);
 
     try {
       const hrefs = await page.$$eval("a[href]", (elements: Element[]) =>
-          elements
-              .map((el) => (el as HTMLAnchorElement).href)
-              .filter((href) => href.startsWith(window.location.origin))
-              .map((href) => new URL(href).pathname)
+        elements
+          .map((el) => (el as HTMLAnchorElement).href)
+          .filter((href) => href.startsWith(window.location.origin))
+          .map((href) => new URL(href).pathname),
       );
 
       for (const href of hrefs) {
         if (!visited.has(href)) queue.push(href);
       }
     } catch (err) {
-      console.error(`Error extracting links from ${url} – ${getErrorMessage(err)}`);
+      console.error(
+        `Error extracting links from ${url} – ${getErrorMessage(err)}`,
+      );
     }
   }
 
