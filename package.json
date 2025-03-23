@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "patch-package",
     "dev": "next dev",
-    "test:playwright:dev": "ts-node --project tsconfig.tests.json tests/external/crawl.ts",
+    "test": "npm run build && ts-node --project tsconfig.tests.json tests/external/crawl.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
