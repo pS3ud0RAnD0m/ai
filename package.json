@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "patch-package",
     "dev": "next dev",
-    "test": "npm run build && ts-node --project tsconfig.tests.json tests/external/crawl.ts",
+    "test": "playwright test",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -31,6 +31,7 @@
     "uuid": "^11.0.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.51.1",
     "@types/node": "^22.10.1",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
