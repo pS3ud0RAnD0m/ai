@@ -3,7 +3,9 @@
 
 !.gitignore
 !app/**
+!tests/global.d.ts
 !next.config.mjs
+!next-env.d.ts
 !package.json
 !package-lock.json
 !patches/**
