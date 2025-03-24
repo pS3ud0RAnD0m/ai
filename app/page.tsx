@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "AI - Home",
+  description: "Home",
+};
+
 export default function HomePage() {
   return (
     <div className="p-4">
