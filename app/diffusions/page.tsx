@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "AI - Diffusions",
+  description: "Diffusions",
+};
+
 export default function DiffusionsPage() {
   return (
     <div className="p-4">

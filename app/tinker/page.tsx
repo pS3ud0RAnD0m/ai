@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "AI - Tinker",
+  description: "Tinker",
+};
+
 export default function SettingsPage() {
   return (
     <div className="p-4">
