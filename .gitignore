@@ -3,7 +3,7 @@
 
 !.gitignore
 !app/**
-!tests/global.d.ts
+!eslint.config.mjs
 !next.config.mjs
 !next-env.d.ts
 !package.json
