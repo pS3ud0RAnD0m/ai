@@ -115,7 +115,7 @@ function ProviderDropdown() {
         Provider
       </label>
       <Headless.Listbox value={selectedProvider} onChange={setSelectedProvider}>
-        <Headless.Listbox.Button className="w-full rounded-md border border-gray-500 text-gray-400 bg-black py-2 px-3 text-left shadow-sm">
+        <Headless.Listbox.Button className="w-full rounded-md border border-gray-500 text-gray-400 bg-black py-2 px-3 text-left shadow-xs">
           {selectedProvider || "Select provider"}
         </Headless.Listbox.Button>
         <Headless.Listbox.Options className="absolute z-10 mt-1 w-full rounded-md text-gray-400 bg-black shadow-lg">
@@ -186,7 +186,7 @@ function ModelDropdown({
         Select Model
       </label>
       <Headless.Listbox>
-        <Headless.Listbox.Button className="w-full rounded-md border border-gray-500 text-gray-400 bg-black py-2 px-3 text-left shadow-sm">
+        <Headless.Listbox.Button className="w-full rounded-md border border-gray-500 text-gray-400 bg-black py-2 px-3 text-left shadow-xs">
           Choose a model
         </Headless.Listbox.Button>
         <Headless.Listbox.Options className="absolute z-10 mt-1 w-full rounded-md text-gray-400 bg-black shadow-lg">

@@ -116,7 +116,7 @@ const Container: React.FC = () => {
                 role === "user"
                   ? "bg-red-700 text-white"
                   : "bg-black text-gray-200"
-              } flex-grow leading-relaxed`} // Line height adjustment for alignment
+              } grow leading-relaxed`} // Line height adjustment for alignment
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(content.replace(/\n/g, "<br />")),
               }}
@@ -135,7 +135,7 @@ const Container: React.FC = () => {
             handleInputChange(e);
             autoExpand();
           }}
-          className="flex-1 bg-black text-white placeholder-gray-500 border-2 border-metallic shadow-polished rounded-md px-4 py-2 focus:ring-1 focus:border-green-500 outline-none resize-none"
+          className="flex-1 bg-black text-white placeholder-gray-500 border-2 border-metallic shadow-polished rounded-md px-4 py-2 focus:ring-1 focus:border-green-500 outline-hidden resize-none"
           rows={1} // Start with a single row
           disabled={isLoading}
           onKeyDown={(e) => {

@@ -66,7 +66,7 @@ export function SidebarLayout({ children }: React.PropsWithChildren<object>) {
     <div className="relative flex h-screen">
       {/* Sidebar */}
       <div
-        className="h-screen bg-gray-900 border-r border-gray-600 transition-all duration-300 flex-shrink-0 relative"
+        className="h-screen bg-gray-900 border-r border-gray-600 transition-all duration-300 shrink-0 relative"
         style={{ width: `${sidebarWidth}px` }}
       >
         {showSidebarContent && isSidebarOpen && <Sidebar />}
