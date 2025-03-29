@@ -22,7 +22,7 @@
     "dompurify": "^3.2.2",
     "framer-motion": "^11.13.1",
     "next": "^15.2.4",
-    "openai": "^4.89.0",
+    "openai": "^4.90.0",
     "react": "^19.1.0",
     "react-dom": "^19.0.0",
     "sharp": "^0.33.5",
