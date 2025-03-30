@@ -12,14 +12,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/*": ["./*"]
-    },
+    "plugins": [{ "name": "next" }],
+    "paths": { "@/*": ["./*"] },
     "target": "ES2017"
   },
   "include": [
@@ -29,5 +23,12 @@
     ".next/types/**/*.ts",
     "tests/**/*"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "transpileOnly": true,
+    "compilerOptions": {
+      "module": "CommonJS",
+      "moduleResolution": "node"
+    }
+  }
 }

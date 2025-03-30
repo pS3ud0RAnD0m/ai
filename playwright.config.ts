@@ -3,7 +3,7 @@ import * as dotenv from "dotenv";
 
 dotenv.config({ path: ".env.local" });
 
-const HOSTNAME = process.env.NEXT_PUBLIC_HOSTNAME;
+const HOSTNAME = "http://" + process.env.NEXT_PUBLIC_HOSTNAME;
 
 if (!HOSTNAME) {
   throw new Error("Missing NEXT_PUBLIC_HOSTNAME in .env.local");

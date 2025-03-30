@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "postinstall": "patch-package",
-    "dev": "next dev",
+    "dev": "ts-node dev.ts",
     "test": "playwright test",
     "build": "next build",
-    "start": "next start",
+    "start": "ts-node start.ts",
     "lint": "next lint"
   },
   "dependencies": {
@@ -39,6 +39,7 @@
     "@types/tailwindcss": "^3.1.0",
     "@types/uuid": "^10.0.0",
     "ajv": "^8.17.1",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.7",
     "eslint": "^9.23.0",
     "eslint-plugin-react": "^7.37.4",
