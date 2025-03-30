@@ -3,6 +3,7 @@
 
 !.gitignore
 !app/**
+!dev.ts
 !eslint.config.mjs
 !next.config.mjs
 !next-env.d.ts
@@ -12,6 +13,7 @@
 !playwright.config.ts
 !postcss.config.mjs
 !README.md
+!start.ts
 !tailwind.config.ts
 !tests/**
 !tsconfig.json
