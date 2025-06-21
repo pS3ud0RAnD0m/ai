@@ -21,7 +21,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "tests/**/*"
+    "tests/**/*",
+    "tests/global.d.ts"
   ],
   "exclude": ["node_modules"],
   "ts-node": {

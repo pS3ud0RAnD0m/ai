@@ -1,7 +1,8 @@
 export {};
 
-/* eslint-disable no-var */
+import type { ChildProcess } from 'child_process';
+
 declare global {
-  var prodServer: import("child_process").ChildProcess;
+  var prodServer: ChildProcess | undefined;
+  var prodServerPid: number | undefined;
 }
-/* eslint-enable no-var */
